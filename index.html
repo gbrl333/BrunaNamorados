@@ -20,7 +20,7 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      padding-bottom: 60px;
+      padding-bottom: 80px; /* Aumentado para evitar sobreposição do footer */
     }
 
     .carrossel {
@@ -143,7 +143,7 @@
       font-size: 1.5rem;
       color: white;
       animation: cair linear forwards;
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
     }
 
@@ -215,10 +215,33 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+
+    /* Estilos para a frase romântica animada */
+    .frase-romantica {
+      font-size: 1.8rem;
+      color: #eee;
+      text-align: center;
+      margin: 20px 0;
+      opacity: 0; /* Começa invisível para o fade-in */
+      animation: fadeIn 2s ease-in forwards, glow 3s ease-in-out infinite;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 5px #00ffff; }
+      50% { text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff; }
+    }
   </style>
 </head>
 
 <body>
+
+
   <!-- Carrossel de fotos com setas e legendas -->
   <div class="carrossel">
     <button class="nav-btn prev" aria-label="Foto anterior">❮</button>
@@ -273,7 +296,7 @@
       </div>
 
       <div class="event">
-        <div class="event-icon">🤍</div>
+        <div class="event-icon">💖</div>
         <div class="event-date">Futuro</div>
         <div class="event-text">O resto<br>da nossa vida</div>
       </div>
@@ -348,6 +371,7 @@
     justify-content: flex-end;
     gap: 10px;
     margin-right: 20px;
+    height: 60px; /* Define altura fixa para consistência */
   ">
     “Não importa quantos anos passem... sempre vai ser você.”
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" 
