@@ -308,28 +308,29 @@
     <span class="typing" id="typing-text"></span>
   </div>
 
-  <!-- Botão presente -->
-  <button id="presenteBtn" style="
-    margin-top: 30px;
-    padding: 12px 25px;
-    background-color: #00ffff;
-    color: #0b0f1a;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 8px #00ffff;
-    transition: background-color 0.3s ease;
-  ">
-    Clique para seu presente 🎁
-  </button>
+<!-- Botão presente -->
+<button id="presenteBtn" style="
+  margin-top: 30px;
+  padding: 12px 25px;
+  background-color: #00ffff;
+  color: #0b0f1a;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00ffff;
+  transition: background-color 0.3s ease;
+">
+  Clique para seu presente 🎁
+</button>
 
-  <!-- Modal da mensagem -->
-  <div id="modalPresente" style="
+  <style>
+  #modalPresente {
     display: none;
     position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95); /* Leve escala inicial */
     background: #121a2a;
     color: #00ffff;
     padding: 30px 40px;
@@ -337,22 +338,39 @@
     font-size: 1.2rem;
     text-align: center;
     z-index: 1000;
-    max-width: 120vw;
-  ">
-    Você ganhou um vale presente <br/>
-    Para Resgatar me de um Beijinho
-    <br/><br/>
-    <button id="fecharModal" style="
-      margin-top: 15px;
-      padding: 8px 20px;
-      border: none;
-      border-radius: 15px;
-      background: #00ffff;
-      color: #0b0f1a;
-      font-weight: bold;
-      cursor: pointer;
-    ">Fechar</button>
-  </div>
+    max-width: 90%; /* Responsivo para celulares */
+    opacity: 0; /* Começa invisível para fade-in */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave */
+  }
+
+  #modalPresente.show {
+    opacity: 1; /* Visível ao aparecer */
+    transform: translate(-50%, -50%) scale(1); /* Escala normal */
+  }
+
+  #fecharModal {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 15px;
+    background: #00ffff;
+    color: #0b0f1a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #fecharModal:hover {
+    background: #00cccc; /* Efeito hover mais claro */
+  }
+</style>
+
+<div id="modalPresente">
+  Você ganhou um vale presente <br/>
+  Para Resgatar me de um Beijinho
+  <br/><br/>
+  <button id="fecharModal">Fechar</button>
+</div>
 
   <!-- Footer -->
   <footer style="
@@ -455,24 +473,26 @@
     atualizarContador();
 
     // Modal do presente
-    const btnPresente = document.getElementById("presenteBtn");
-    const modal = document.getElementById("modalPresente");
-    const fechar = document.getElementById("fecharModal");
+   const btnPresente = document.getElementById("presenteBtn");
+  const modal = document.getElementById("modalPresente");
+  const fechar = document.getElementById("fecharModal");
 
-    btnPresente.addEventListener("click", () => {
-      modal.style.display = "block";
-    });
+  btnPresente.addEventListener("click", () => {
+    modal.style.display = "block";
+    setTimeout(() => modal.classList.add("show"), 10); // Adiciona classe após exibição
+  });
 
-    fechar.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
+  fechar.addEventListener("click", () => {
+    modal.classList.remove("show");
+    setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
+  });
 
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("show");
+      setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
+    }
+  });
     // Efeito de máquina de escrever
     const textoOriginal = `A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...  
 Já fomos um "nós" uma vez, e por algum motivo o tempo nos separou.  
