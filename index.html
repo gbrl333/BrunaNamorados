@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para o meu Amor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #0b0f1a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    .carrossel {
+      max-width: 600px;
+      width: 90%;
+      margin-top: 30px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 0 10px #0008;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .contador {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .bloco {
+      background: #121a2a;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 5px #0006;
+    }
+
+    .bloco .numero {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+    .bloco span {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .texto {
+      max-width: 600px;
+      padding: 30px 20px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+      color: #eee;
+      overflow: hidden; /* Evita que o texto transborde durante a animação */
+    }
+
+    .texto .typing {
+      display: inline-block;
+      white-space: pre-wrap; /* Respeita quebras de linha e espaços */
+      border-right: 2px solid #00ffff; /* Barra piscante ciano */
+      animation: blink 0.7s step-end infinite; /* Efeito de cursor piscando */
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #00ffff; }
+    }
+
+    .coracoes {
+      font-size: 2rem;
+      color: white;
+      animation: pulse 1.5s infinite;
+      margin-top: 10px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    /* Estilos para setas do carrossel */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Estilos para legenda */
+    .caption {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px;
+      font-size: 1rem;
+      border-radius: 0 0 16px 16px;
+    }
+
+    /* Corações animados no fundo */
+    .coracao-caindo {
+      position: fixed;
+      top: -30px;
+      font-size: 1.5rem;
+      color: white;
+      animation: cair linear forwards;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes cair {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Estilos da linha do tempo */
+    .timeline-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 40px 20px;
+      background-color: transparent;
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      position: relative;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 45px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #444;
+      z-index: 1;
+    }
+
+    .event {
+      position: relative;
+      text-align: center;
+      width: 150px;
+      z-index: 2;
+    }
+
+    .event-icon {
+      width: 30px;
+      height: 30px;
+      background-color: #222;
+      border: 3px solid white;
+      border-radius: 50%;
+      margin: 0 auto;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .event-date {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ddd;
+    }
+
+    .event-text {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Carrossel de fotos com setas e legendas -->
+  <div class="carrossel">
+    <button class="nav-btn prev" aria-label="Foto anterior">❮</button>
+    <div class="slides" id="slides">
+      <img src="foto1.jpg" alt="Foto 1" data-caption="O Começo">
+      <img src="foto2.jpg" alt="Foto 2" data-caption="Um momento especial juntos">
+      <img src="foto3.jpg" alt="Foto 3" data-caption="Você sempre me faz sorrir">
+    </div>
+    <button class="nav-btn next" aria-label="Próxima foto">❯</button>
+    <div class="caption" id="caption"></div>
+  </div>
+
+  <!-- Contador -->
+  <div class="contador" id="contador">
+    <div class="bloco">
+      <div class="numero" id="dias">00</div>
+      <span>dias</span>
+    </div>
+    <div class="bloco">
+      <div class="numero" id="horas">00</div>
+      <span>horas</span>
+    </div>
+    <div class="bloco">
+      <div class="numero" id="minutos">00</div>
+      <span>minutos</span>
+    </div>
+    <div class="bloco">
+      <div class="numero" id="segundos">00</div>
+      <span>segundos</span>
+    </div>
+  </div>
+
+  <!-- Linha do tempo -->
+  <div class="timeline-container">
+    <div class="timeline">
+      <div class="event">
+        <div class="event-icon">🎉</div>
+        <div class="event-date">Jun 2014</div>
+        <div class="event-text">Nos conhecemos<br>em uma festa junina</div>
+      </div>
+
+      <div class="event">
+        <div class="event-icon">🔄</div>
+        <div class="event-date">Jul 2023</div>
+        <div class="event-text">Nosso reencontro</div>
+      </div>
+
+      <div class="event">
+        <div class="event-icon">💍</div>
+        <div class="event-date">Mar 2025</div>
+        <div class="event-text">Começamos<br>a namorar</div>
+      </div>
+
+      <div class="event">
+        <div class="event-icon">🤍</div>
+        <div class="event-date">Futuro</div>
+        <div class="event-text">O resto<br>da nossa vida</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Texto romântico com efeito de máquina de escrever -->
+  <div class="texto">
+    <span class="typing" id="typing-text"></span>
+  </div>
+
+  <!-- Botão presente -->
+  <button id="presenteBtn" style="
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #00ffff;
+    color: #0b0f1a;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 8px #00ffff;
+    transition: background-color 0.3s ease;
+  ">
+    Clique para seu presente 🎁
+  </button>
+
+  <!-- Modal da mensagem -->
+  <div id="modalPresente" style="
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #121a2a;
+    color: #00ffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+    z-index: 1000;
+    max-width: 120vw;
+  ">
+    Você ganhou um vale presente <br/>
+    Para Resgatar me de um Beijinho
+    <br/><br/>
+    <button id="fecharModal" style="
+      margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 15px;
+      background: #00ffff;
+      color: #0b0f1a;
+      font-weight: bold;
+      cursor: pointer;
+    ">Fechar</button>
+  </div>
+
+  <!-- Footer -->
+  <footer style="
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffffcc;
+    font-style: italic;
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 20px;
+  ">
+    “Não importa quantos anos passem... sempre vai ser você.”
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" 
+         alt="Eevee" 
+         style="
+           height: 40px;
+           opacity: 0.7;
+           pointer-events: none;
+         " />
+  </footer>
+
+  <script>
+    // Corações caindo
+    function criarCoracao() {
+      const coracao = document.createElement('span');
+      coracao.classList.add('coracao-caindo');
+      coracao.innerText = '🤍';
+      coracao.style.left = Math.random() * 100 + 'vw';
+      coracao.style.animationDuration = (3 + Math.random() * 3) + 's';
+      coracao.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+      document.body.appendChild(coracao);
+
+      setTimeout(() => coracao.remove(), 6000);
+    }
+
+    for (let i = 0; i < 10; i++) {
+      setTimeout(criarCoracao, i * 300);
+    }
+
+    setInterval(criarCoracao, 800);
+
+    // Carrossel com setas e legenda
+    const slides = document.getElementById('slides');
+    const caption = document.getElementById('caption');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let index = 0;
+
+    function updateCarousel() {
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      caption.textContent = slides.children[index].dataset.caption;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + slides.children.length) % slides.children.length;
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % slides.children.length;
+      updateCarousel();
+    });
+
+    setInterval(() => {
+      index = (index + 1) % slides.children.length;
+      updateCarousel();
+    }, 3000);
+
+    // Definir legenda inicial
+    updateCarousel();
+
+    // Contador
+    const dataInicio = new Date("2025-03-01T21:30:00");
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diff = agora - dataInicio;
+
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / 60000) % 60;
+      const horas = Math.floor(diff / 3600000) % 24;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      document.getElementById("dias").textContent = dias.toString().padStart(2, '0');
+      document.getElementById("horas").textContent = horas.toString().padStart(2, '0');
+      document.getElementById("minutos").textContent = minutos.toString().padStart(2, '0');
+      document.getElementById("segundos").textContent = segundos.toString().padStart(2, '0');
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    // Modal do presente
+    const btnPresente = document.getElementById("presenteBtn");
+    const modal = document.getElementById("modalPresente");
+    const fechar = document.getElementById("fecharModal");
+
+    btnPresente.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+
+    fechar.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    // Efeito de máquina de escrever
+    const textoOriginal = `A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...  
+Já fomos um "nós" uma vez, e por algum motivo o tempo nos separou.  
+Mas hoje, depois de tantos anos, nossos caminhos se encontraram de novo — e finalmente a vida faz sentido de novo .  
+Ter você de volta é como respirar de novo e ser Feliz Novamente . Você é e sempre foi o amor da minha vida. <br/> 
+Te amo, Bruna Fernanda Locatelli. 🤍`;
+    
+    const typingText = document.getElementById('typing-text');
+    let indexText = 0;
+
+    function typeWriter() {
+      if (indexText < textoOriginal.length) {
+        const char = textoOriginal.charAt(indexText);
+        if (char === '<') {
+          // Detecta o início de uma tag <br> ou <br/>
+          if (textoOriginal.slice(indexText, indexText + 4) === '<br>') {
+            typingText.innerHTML += '<br>';
+            indexText += 4;
+          } else if (textoOriginal.slice(indexText, indexText + 5) === '<br/>') {
+            typingText.innerHTML += '<br>';
+            indexText += 5;
+          } else {
+            typingText.textContent += char;
+            indexText++;
+          }
+        } else {
+          typingText.textContent += char;
+          indexText++;
+        }
+        setTimeout(typeWriter, 50); // Velocidade de 50ms por caractere
+      } else {
+        // Para a animação do cursor piscante após terminar
+        typingText.style.animation = 'none';
+        typingText.style.borderRight = 'none';
+      }
+    }
+
+    // Inicia a animação quando a página carrega
+    document.addEventListener('DOMContentLoaded', () => {
+      typeWriter();
+    });
+  </script>
+</body>
+</html>
