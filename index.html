@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Para o meu Amor</title>
   <style>
     * {
@@ -25,32 +25,33 @@
     .main-container {
       width: 100vw;
       min-height: 100dvh;
-      padding: 0 32px 60px;
+      padding: 0 16px 40px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 8px;
     }
 
     .content-container {
       width: 100%;
-      height: 80dvh;
+      min-height: 40dvh;
+      max-height: 60dvh;
       margin: 0;
-      padding: 16px 32px;
+      padding: 8px 16px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
     .content-container:last-child {
-      margin-bottom: 40px;
+      margin-bottom: 24px;
     }
 
     .carrossel {
       width: 100%;
       position: relative;
       overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 0 10px #0008;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #0008;
     }
 
     .slides {
@@ -60,45 +61,46 @@
 
     .slides img {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 8px;
+      object-fit: cover;
     }
 
     .contador {
       display: flex;
-      gap: 15px;
+      gap: 8px;
       justify-content: center;
-      font-size: 24pt;
+      font-size: 1rem;
       text-align: left;
       line-height: 1.5;
     }
 
     .bloco {
       background: #121a2a;
-      padding: 10px 15px;
-      border-radius: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
       text-align: center;
-      box-shadow: 0 0 5px #0006;
+      box-shadow: 0 0 4px #0006;
     }
 
     .bloco .numero {
-      font-size: 32pt;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #00ffff;
-      text-shadow: 0 0 5px #00ffff;
+      text-shadow: 0 0 4px #00ffff;
     }
 
     .bloco span {
-      font-size: 24pt;
+      font-size: 0.9rem;
       color: #bbb;
     }
 
     .texto {
-      font-size: 24pt;
+      font-size: 1rem;
       line-height: 1.5;
       text-align: left;
       color: #eee;
       overflow: hidden;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .texto .typing {
@@ -114,10 +116,10 @@
     }
 
     .coracoes {
-      font-size: 32pt;
+      font-size: 1.5rem;
       color: white;
       animation: pulse 1.5s infinite;
-      margin-top: 10px;
+      margin-top: 8px;
       text-align: left;
     }
 
@@ -133,9 +135,9 @@
       background: rgba(0, 0, 0, 0.5);
       color: white;
       border: none;
-      width: 40px;
-      height: 40px;
-      font-size: 24pt;
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -144,25 +146,25 @@
       z-index: 10;
     }
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .prev { left: 8px; }
+    .next { right: 8px; }
 
     .caption {
       position: absolute;
-      bottom: 10px;
+      bottom: 8px;
       width: 100%;
-      text-align: center;
+      text-align: left;
       color: white;
       background: rgba(0, 0, 0, 0.5);
-      padding: 5px;
-      font-size: 24pt;
-      border-radius: 0 0 16px 16px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      border-radius: 0 0 8px 8px;
     }
 
     .coracao-caindo {
       position: fixed;
-      top: -30px;
-      font-size: 1.5rem;
+      top: -20px;
+      font-size: 1rem;
       color: white;
       animation: cair linear forwards;
       z-index: -1;
@@ -179,25 +181,26 @@
     .timeline-container {
       width: 100%;
       overflow-x: auto;
-      padding: 16px 32px;
+      padding: 8px 16px;
       background-color: transparent;
     }
 
     .timeline {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: flex-start;
       position: relative;
-      padding: 20px 0;
+      padding: 16px 0;
+      min-width: 600px;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      top: 45px;
+      top: 35px;
       left: 0;
       width: 100%;
-      height: 3px;
+      height: 2px;
       background-color: #444;
       z-index: 1;
     }
@@ -205,18 +208,18 @@
     .event {
       position: relative;
       text-align: center;
-      width: 150px;
+      width: 120px;
       z-index: 2;
     }
 
     .event-icon {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       background-color: #222;
-      border: 3px solid white;
+      border: 2px solid white;
       border-radius: 50%;
       margin: 0 auto;
-      font-size: 18px;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -224,40 +227,40 @@
     }
 
     .event-date {
-      margin-top: 10px;
-      font-size: 24pt;
+      margin-top: 8px;
+      font-size: 0.9rem;
       color: #ddd;
       text-align: left;
       line-height: 1.5;
     }
 
     .event-text {
-      margin-top: 5px;
-      font-size: 24pt;
+      margin-top: 4px;
+      font-size: 0.9rem;
       color: #aaa;
       text-align: left;
       line-height: 1.5;
     }
 
     .frase-romantica {
-      font-size: 32pt;
+      font-size: 1.5rem;
       color: #eee;
       text-align: left;
-      margin: 20px 0;
+      margin: 16px 0;
       opacity: 0;
       animation: fadeIn 2s ease-in forwards, glow 3s ease-in-out infinite;
-      text-shadow: 0 0 5px #00ffff;
+      text-shadow: 0 0 4px #00ffff;
       line-height: 1.5;
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-20px); }
+      0% { opacity: 0; transform: translateY(-16px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes glow {
-      0%, 100% { text-shadow: 0 0 5px #00ffff; }
-      50% { text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff; }
+      0%, 100% { text-shadow: 0 0 4px #00ffff; }
+      50% { text-shadow: 0 0 12px #00ffff, 0 0 16px #00ffff; }
     }
 
     #modalPresente {
@@ -268,9 +271,9 @@
       transform: translate(-50%, -50%) scale(0.95);
       background: #121a2a;
       color: #00ffff;
-      padding: 30px 40px;
-      border-radius: 15px;
-      font-size: 24pt;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
       text-align: left;
       z-index: 1000;
       max-width: 90%;
@@ -285,15 +288,16 @@
     }
 
     #fecharModal {
-      margin-top: 15px;
-      padding: 8px 20px;
+      margin-top: 12px;
+      padding: 6px 16px;
       border: none;
-      border-radius: 15px;
+      border-radius: 12px;
       background: #00ffff;
       color: #0b0f1a;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      font-size: 0.9rem;
     }
 
     #fecharModal:hover {
@@ -305,8 +309,8 @@
       bottom: 0;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.6);
-      padding: 8px 32px;
-      font-size: 14pt;
+      padding: 6px 16px;
+      font-size: 0.8rem;
       color: #ffffffcc;
       font-style: italic;
       backdrop-filter: blur(4px);
@@ -314,17 +318,122 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 10px;
-      height: 40px;
+      gap: 8px;
+      height: 32px;
       text-align: left;
       line-height: 1.5;
     }
 
     footer img {
-      height: 24px;
+      height: 20px;
       opacity: 0.7;
       pointer-events: none;
     }
+
+    /* Media Queries para telas menores */
+    @media (max-width: 480px) {
+      .main-container {
+        padding: 0 12px 32px;
+      }
+
+      .content-container {
+        padding: 6px 12px;
+        min-height: 30dvh;
+        max-height: 50dvh;
+      }
+
+      .content-container:last-child {
+        margin-bottom: 20px;
+      }
+
+      .carrossel {
+        border-radius: 6px;
+      }
+
+      .nav-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+      }
+
+      .prev { left: 6px; }
+      .next { right: 6px; }
+
+      .caption {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+      }
+
+      .contador {
+        gap: 6px;
+        font-size: 0.9rem;
+      }
+
+      .bloco {
+        padding: 6px 10px;
+      }
+
+      .bloco .numero {
+        font-size: 1.2rem;
+      }
+
+      .bloco span {
+        font-size: 0.8rem;
+      }
+
+      .texto {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .coracoes {
+        font-size: 1.2rem;
+        margin-top: 6px;
+      }
+
+      .timeline-container {
+        padding: 6px 12px;
+      }
+
+      .timeline {
+        min-width: 500px;
+      }
+
+      .event {
+        width: 100px;
+      }
+
+      .event-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+      }
+
+      .event-date {
+        font-size: 0.8rem;
+      }
+
+      .event-text {
+        font-size: 0.8rem;
+      }
+
+      .frase-romantica {
+        font-size: 1.2rem;
+        margin: 12px 0;
+      }
+
+      #modalPresente {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+
+      #fecharModal {
+        font-size: 0.8rem;
+        padding: 5px 14px;
+      }
+
+      #presenteBtn {
+abulleiro    }
   </style>
 </head>
 <body>
@@ -398,16 +507,16 @@
 
     <div class="content-container">
       <button id="presenteBtn" style="
-        padding: 12px 25px;
+        padding: 8px 16px;
         background-color: #00ffff;
         color: #0b0f1a;
         border: none;
-        border-radius: 25px;
+        border-radius: 16px;
         font-weight: bold;
         cursor: pointer;
-        box-shadow: 0 0 8px #00ffff;
+        box-shadow: 0 0 6px #00ffff;
         transition: background-color 0.3s ease;
-        font-size: 24pt;
+        font-size: 1rem;
         text-align: left;
         line-height: 1.5;
       ">
@@ -430,14 +539,13 @@
   </footer>
 
   <script>
-    // Corações caindo
     function criarCoracao() {
       const coracao = document.createElement('span');
       coracao.classList.add('coracao-caindo');
       coracao.innerText = '🤍';
       coracao.style.left = Math.random() * 100 + 'vw';
       coracao.style.animationDuration = (3 + Math.random() * 3) + 's';
-      coracao.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+      coracao.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
       document.body.appendChild(coracao);
 
       setTimeout(() => coracao.remove(), 6000);
@@ -449,7 +557,6 @@
 
     setInterval(criarCoracao, 800);
 
-    // Carrossel com setas e legenda
     const slides = document.getElementById('slides');
     const caption = document.getElementById('caption');
     const prevBtn = document.querySelector('.prev');
@@ -478,7 +585,6 @@
 
     updateCarousel();
 
-    // Contador
     const dataInicio = new Date("2025-03-01T21:30:00");
 
     function atualizarContador() {
@@ -499,7 +605,6 @@
     setInterval(atualizarContador, 1000);
     atualizarContador();
 
-    // Modal do presente
     const btnPresente = document.getElementById("presenteBtn");
     const modal = document.getElementById("modalPresente");
     const fechar = document.getElementById("fecharModal");
@@ -511,7 +616,7 @@
 
     fechar.addEventListener("click", () => {
       modal.classList.remove("show");
-      setTimeout(() => modal.style.display = "none", 10);
+      setTimeout(() => modal.style.display = "none", 300);
     });
 
     window.addEventListener("click", (e) => {
@@ -521,7 +626,6 @@
       }
     });
 
-    // Efeito de máquina de escrever
     const textoOriginal = `A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...  
 Já fomos um "nós" uma vez, e por algum motivo o tempo nos separou.  
 Mas hoje, depois de tantos anos, nossos caminhos se encontraram de novo — e finalmente a vida faz sentido de novo .  
