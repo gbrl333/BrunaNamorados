@@ -62,8 +62,8 @@
     .bloco .numero {
       font-size: 1.8rem;
       font-weight: bold;
-      color: #00ffff;
-      text-shadow: 0 0 5px #00ffff;
+      color: #FF9999;
+      text-shadow: 0 0 5px #FF9999;
     }
 
     .bloco span {
@@ -84,13 +84,13 @@
     .texto .typing {
       display: inline-block;
       white-space: pre-wrap; /* Respeita quebras de linha e espaços */
-      border-right: 2px solid #00ffff; /* Barra piscante ciano */
+      border-right: 2px solid #FF9999; /* Barra piscante ciano */
       animation: blink 0.7s step-end infinite; /* Efeito de cursor piscando */
     }
 
     @keyframes blink {
       0%, 100% { border-color: transparent; }
-      50% { border-color: #00ffff; }
+      50% { border-color: #FF9999; }
     }
 
     .coracoes {
@@ -229,7 +229,7 @@
       margin: 20px 0;
       opacity: 0; /* Começa invisível para o fade-in */
       animation: fadeIn 2s ease-in forwards, glow 3s ease-in-out infinite;
-      text-shadow: 0 0 5px #00ffff;
+      text-shadow: 0 0 5px #FF9999;
     }
 
     @keyframes fadeIn {
@@ -238,8 +238,8 @@
     }
 
     @keyframes glow {
-      0%, 100% { text-shadow: 0 0 5px #00ffff; }
-      50% { text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff; }
+      0%, 100% { text-shadow: 0 0 5px#FF9999; }
+      50% { text-shadow: 0 0 15px #FF9999, 0 0 20px #FF9999; }
     }
 
 
@@ -319,17 +319,16 @@
   <div class="texto">
     <span class="typing" id="typing-text"></span>
   </div>
-<!-- Botão presente -->
+<!-- Botão presente  -->
 <button id="presenteBtn" style="
   margin-top: 30px;
   padding: 12px 25px;
-  background-color: #00ffff;
   color: #0b0f1a;
   border: none;
   border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 8px #00ffff;
+  box-shadow: 0 0 8px #FF9999;
   transition: background-color 0.3s ease;
 ">
   Clique para seu presente 🎁
@@ -343,7 +342,7 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95); /* Leve escala inicial */
     background: #121a2a;
-    color: #00ffff;
+    color: #FF9999;
     padding: 30px 40px;
     border-radius: 15px;
     font-size: 1.2rem;
@@ -364,7 +363,7 @@
     padding: 8px 20px;
     border: none;
     border-radius: 15px;
-    background: #00ffff;
+    background: #FF9999;
     color: #0b0f1a;
     font-weight: bold;
     cursor: pointer;
@@ -372,7 +371,7 @@
   }
 
   #fecharModal:hover {
-    background: #00cccc; /* Efeito hover mais claro */
+    background:#FF9999 /* Efeito hover mais claro */
   }
 </style>
 
