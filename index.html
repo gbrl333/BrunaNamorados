@@ -11,7 +11,7 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
+
     body {
       background-color: #0b0f1a;
       color: #fff;
@@ -20,13 +20,33 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      padding-bottom: 80px; /* Aumentado para evitar sobreposição do footer */
+    }
+
+    .main-container {
+      width: 100vw;
+      min-height: 100dvh;
+      padding: 0 32px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .content-container {
+      width: 100%;
+      height: 80dvh;
+      margin: 0;
+      padding: 16px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .content-container:last-child {
+      margin-bottom: 40px;
     }
 
     .carrossel {
-      max-width: 600px;
-      width: 90%;
-      margin-top: 30px;
+      width: 100%;
       position: relative;
       overflow: hidden;
       border-radius: 16px;
@@ -44,11 +64,12 @@
     }
 
     .contador {
-      margin-top: 30px;
       display: flex;
       gap: 15px;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 24pt;
+      text-align: left;
+      line-height: 1.5;
     }
 
     .bloco {
@@ -60,32 +81,31 @@
     }
 
     .bloco .numero {
-      font-size: 1.8rem;
+      font-size: 32pt;
       font-weight: bold;
       color: #00ffff;
       text-shadow: 0 0 5px #00ffff;
     }
 
     .bloco span {
-      font-size: 0.9rem;
+      font-size: 24pt;
       color: #bbb;
     }
 
     .texto {
-      max-width: 600px;
-      padding: 30px 20px;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: center;
+      font-size: 24pt;
+      line-height: 1.5;
+      text-align: left;
       color: #eee;
-      overflow: hidden; /* Evita que o texto transborde durante a animação */
+      overflow: hidden;
+      margin-bottom: 1rem;
     }
 
     .texto .typing {
       display: inline-block;
-      white-space: pre-wrap; /* Respeita quebras de linha e espaços */
-      border-right: 2px solid #00ffff; /* Barra piscante ciano */
-      animation: blink 0.7s step-end infinite; /* Efeito de cursor piscando */
+      white-space: pre-wrap;
+      border-right: 2px solid #00ffff;
+      animation: blink 0.7s step-end infinite;
     }
 
     @keyframes blink {
@@ -94,10 +114,11 @@
     }
 
     .coracoes {
-      font-size: 2rem;
+      font-size: 32pt;
       color: white;
       animation: pulse 1.5s infinite;
       margin-top: 10px;
+      text-align: left;
     }
 
     @keyframes pulse {
@@ -105,7 +126,6 @@
       50% { transform: scale(1.2); opacity: 0.7; }
     }
 
-    /* Estilos para setas do carrossel */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -113,17 +133,20 @@
       background: rgba(0, 0, 0, 0.5);
       color: white;
       border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      font-size: 24pt;
       border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 10;
     }
 
     .prev { left: 10px; }
     .next { right: 10px; }
 
-    /* Estilos para legenda */
     .caption {
       position: absolute;
       bottom: 10px;
@@ -132,11 +155,10 @@
       color: white;
       background: rgba(0, 0, 0, 0.5);
       padding: 5px;
-      font-size: 1rem;
+      font-size: 24pt;
       border-radius: 0 0 16px 16px;
     }
 
-    /* Corações animados no fundo */
     .coracao-caindo {
       position: fixed;
       top: -30px;
@@ -154,11 +176,10 @@
       }
     }
 
-    /* Estilos da linha do tempo */
     .timeline-container {
       width: 100%;
       overflow-x: auto;
-      padding: 40px 20px;
+      padding: 16px 32px;
       background-color: transparent;
     }
 
@@ -167,8 +188,6 @@
       justify-content: space-around;
       align-items: flex-start;
       position: relative;
-      max-width: 1000px;
-      margin: auto;
       padding: 20px 0;
     }
 
@@ -206,25 +225,29 @@
 
     .event-date {
       margin-top: 10px;
-      font-size: 1rem;
+      font-size: 24pt;
       color: #ddd;
+      text-align: left;
+      line-height: 1.5;
     }
 
     .event-text {
       margin-top: 5px;
-      font-size: 0.9rem;
+      font-size: 24pt;
       color: #aaa;
+      text-align: left;
+      line-height: 1.5;
     }
 
-    /* Estilos para a frase romântica animada */
     .frase-romantica {
-      font-size: 1.8rem;
+      font-size: 32pt;
       color: #eee;
-      text-align: center;
+      text-align: left;
       margin: 20px 0;
-      opacity: 0; /* Começa invisível para o fade-in */
+      opacity: 0;
       animation: fadeIn 2s ease-in forwards, glow 3s ease-in-out infinite;
       text-shadow: 0 0 5px #00ffff;
+      line-height: 1.5;
     }
 
     @keyframes fadeIn {
@@ -236,168 +259,174 @@
       0%, 100% { text-shadow: 0 0 5px #00ffff; }
       50% { text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff; }
     }
+
+    #modalPresente {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background: #121a2a;
+      color: #00ffff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      font-size: 24pt;
+      text-align: left;
+      z-index: 1000;
+      max-width: 90%;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      line-height: 1.5;
+    }
+
+    #modalPresente.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    #fecharModal {
+      margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 15px;
+      background: #00ffff;
+      color: #0b0f1a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #fecharModal:hover {
+      background: #00cccc;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 8px 32px;
+      font-size: 14pt;
+      color: #ffffffcc;
+      font-style: italic;
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      height: 40px;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    footer img {
+      height: 24px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
-
 <body>
-
-
-  <!-- Carrossel de fotos com setas e legendas -->
-  <div class="carrossel">
-    <button class="nav-btn prev" aria-label="Foto anterior">❮</button>
-    <div class="slides" id="slides">
-      <img src="foto1.jpg" alt="Foto 1" data-caption="O Começo">
-      <img src="foto2.jpg" alt="Foto 2" data-caption="Um momento especial juntos">
-      <img src="foto3.jpg" alt="Foto 3" data-caption="Você sempre me faz sorrir">
-    </div>
-    <button class="nav-btn next" aria-label="Próxima foto">❯</button>
-    <div class="caption" id="caption"></div>
-  </div>
-
-  <!-- Contador -->
-  <div class="contador" id="contador">
-    <div class="bloco">
-      <div class="numero" id="dias">00</div>
-      <span>dias</span>
-    </div>
-    <div class="bloco">
-      <div class="numero" id="horas">00</div>
-      <span>horas</span>
-    </div>
-    <div class="bloco">
-      <div class="numero" id="minutos">00</div>
-      <span>minutos</span>
-    </div>
-    <div class="bloco">
-      <div class="numero" id="segundos">00</div>
-      <span>segundos</span>
-    </div>
-  </div>
-
-  <!-- Linha do tempo -->
-  <div class="timeline-container">
-    <div class="timeline">
-      <div class="event">
-        <div class="event-icon">🎉</div>
-        <div class="event-date">Jun 2014</div>
-        <div class="event-text">Nos conhecemos<br>em uma festa junina</div>
-      </div>
-
-      <div class="event">
-        <div class="event-icon">🔄</div>
-        <div class="event-date">Jul 2023</div>
-        <div class="event-text">Nosso reencontro</div>
-      </div>
-
-      <div class="event">
-        <div class="event-icon">💍</div>
-        <div class="event-date">Mar 2025</div>
-        <div class="event-text">Começamos<br>a namorar</div>
-      </div>
-
-      <div class="event">
-        <div class="event-icon">💖</div>
-        <div class="event-date">Futuro</div>
-        <div class="event-text">O resto<br>da nossa vida</div>
+  <div class="main-container">
+    <div class="content-container">
+      <div class="carrossel">
+        <button class="nav-btn prev" aria-label="Foto anterior">❮</button>
+        <div class="slides" id="slides">
+          <img src="foto1.jpg" alt="Foto 1" data-caption="O Começo">
+          <img src="foto2.jpg" alt="Foto 2" data-caption="Um momento especial juntos">
+          <img src="foto3.jpg" alt="Foto 3" data-caption="Você sempre me faz sorrir">
+        </div>
+        <button class="nav-btn next" aria-label="Próxima foto">❯</button>
+        <div class="caption" id="caption"></div>
       </div>
     </div>
+
+    <div class="content-container">
+      <div class="contador" id="contador">
+        <div class="bloco">
+          <div class="numero" id="dias">00</div>
+          <span>dias</span>
+        </div>
+        <div class="bloco">
+          <div class="numero" id="horas">00</div>
+          <span>horas</span>
+        </div>
+        <div class="bloco">
+          <div class="numero" id="minutos">00</div>
+          <span>minutos</span>
+        </div>
+        <div class="bloco">
+          <div class="numero" id="segundos">00</div>
+          <span>segundos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="timeline-container">
+        <div class="timeline">
+          <div class="event">
+            <div class="event-icon">🎉</div>
+            <div class="event-date">Jun 2014</div>
+            <div class="event-text">Nos conhecemos<br>em uma festa junina</div>
+          </div>
+          <div class="event">
+            <div class="event-icon">🔄</div>
+            <div class="event-date">Jul 2023</div>
+            <div class="event-text">Nosso reencontro</div>
+          </div>
+          <div class="event">
+            <div class="event-icon">💍</div>
+            <div class="event-date">Mar 2025</div>
+            <div class="event-text">Começamos<br>a namorar</div>
+          </div>
+          <div class="event">
+            <div class="event-icon">💖</div>
+            <div class="event-date">Futuro</div>
+            <div class="event-text">O resto<br>da nossa vida</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="texto">
+        <span class="typing" id="typing-text"></span>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <button id="presenteBtn" style="
+        padding: 12px 25px;
+        background-color: #00ffff;
+        color: #0b0f1a;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 8px #00ffff;
+        transition: background-color 0.3s ease;
+        font-size: 24pt;
+        text-align: left;
+        line-height: 1.5;
+      ">
+        Clique para seu presente 🎁
+      </button>
+    </div>
+
+    <div class="content-container">
+      <div id="modalPresente">
+        Você ganhou um vale presente <br/>
+        <br/><br/>
+        <button id="fecharModal">Fechar</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Texto romântico com efeito de máquina de escrever -->
-  <div class="texto">
-    <span class="typing" id="typing-text"></span>
-  </div>
-
-<!-- Botão presente -->
-<button id="presenteBtn" style="
-  margin-top: 30px;
-  padding: 12px 25px;
-  background-color: #00ffff;
-  color: #0b0f1a;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 8px #00ffff;
-  transition: background-color 0.3s ease;
-">
-  Clique para seu presente 🎁
-</button>
-
-  <style>
-  #modalPresente {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95); /* Leve escala inicial */
-    background: #121a2a;
-    color: #00ffff;
-    padding: 30px 40px;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    text-align: center;
-    z-index: 1000;
-    max-width: 90%; /* Responsivo para celulares */
-    opacity: 0; /* Começa invisível para fade-in */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave */
-  }
-
-  #modalPresente.show {
-    opacity: 1; /* Visível ao aparecer */
-    transform: translate(-50%, -50%) scale(1); /* Escala normal */
-  }
-
-  #fecharModal {
-    margin-top: 15px;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 15px;
-    background: #00ffff;
-    color: #0b0f1a;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  #fecharModal:hover {
-    background: #00cccc; /* Efeito hover mais claro */
-  }
-</style>
-
-<div id="modalPresente">
-  Você ganhou um vale presente <br/>
-  <br/><br/>
-  <button id="fecharModal">Fechar</button>
-</div>
-
-  <!-- Footer -->
-  <footer style="
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #ffffffcc;
-    font-style: italic;
-    backdrop-filter: blur(4px);
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-right: 20px;
-    height: 60px; /* Define altura fixa para consistência */
-  ">
+  <footer>
     “Não importa quantos anos passem... sempre vai ser você.”
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" 
-         alt="Eevee" 
-         style="
-           height: 40px;
-           opacity: 0.7;
-           pointer-events: none;
-         " />
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="Eevee"/>
   </footer>
 
   <script>
@@ -447,7 +476,6 @@
       updateCarousel();
     }, 3000);
 
-    // Definir legenda inicial
     updateCarousel();
 
     // Contador
@@ -472,33 +500,34 @@
     atualizarContador();
 
     // Modal do presente
-   const btnPresente = document.getElementById("presenteBtn");
-  const modal = document.getElementById("modalPresente");
-  const fechar = document.getElementById("fecharModal");
+    const btnPresente = document.getElementById("presenteBtn");
+    const modal = document.getElementById("modalPresente");
+    const fechar = document.getElementById("fecharModal");
 
-  btnPresente.addEventListener("click", () => {
-    modal.style.display = "block";
-    setTimeout(() => modal.classList.add("show"), 10); // Adiciona classe após exibição
-  });
+    btnPresente.addEventListener("click", () => {
+      modal.style.display = "block";
+      setTimeout(() => modal.classList.add("show"), 10);
+    });
 
-  fechar.addEventListener("click", () => {
-    modal.classList.remove("show");
-    setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
+    fechar.addEventListener("click", () => {
       modal.classList.remove("show");
-      setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
-    }
-  });
+      setTimeout(() => modal.style.display = "none", 10);
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("show");
+        setTimeout(() => modal.style.display = "none", 300);
+      }
+    });
+
     // Efeito de máquina de escrever
     const textoOriginal = `A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...  
 Já fomos um "nós" uma vez, e por algum motivo o tempo nos separou.  
 Mas hoje, depois de tantos anos, nossos caminhos se encontraram de novo — e finalmente a vida faz sentido de novo .  
 Ter você de volta é como respirar de novo e ser Feliz Novamente . Você é e sempre foi o amor da minha vida. <br/> 
 Te amo, Bruna Fernanda Locatelli. 🤍`;
-    
+
     const typingText = document.getElementById('typing-text');
     let indexText = 0;
 
@@ -506,7 +535,6 @@ Te amo, Bruna Fernanda Locatelli. 🤍`;
       if (indexText < textoOriginal.length) {
         const char = textoOriginal.charAt(indexText);
         if (char === '<') {
-          // Detecta o início de uma tag <br> ou <br/>
           if (textoOriginal.slice(indexText, indexText + 4) === '<br>') {
             typingText.innerHTML += '<br>';
             indexText += 4;
@@ -521,15 +549,13 @@ Te amo, Bruna Fernanda Locatelli. 🤍`;
           typingText.textContent += char;
           indexText++;
         }
-        setTimeout(typeWriter, 50); // Velocidade de 50ms por caractere
+        setTimeout(typeWriter, 50);
       } else {
-        // Para a animação do cursor piscante após terminar
         typingText.style.animation = 'none';
         typingText.style.borderRight = 'none';
       }
     }
 
-    // Inicia a animação quando a página carrega
     document.addEventListener('DOMContentLoaded', () => {
       typeWriter();
     });
