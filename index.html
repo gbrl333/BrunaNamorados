@@ -335,50 +335,109 @@
 </button>
 
   <style>
-  #modalPresente {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95); /* Leve escala inicial */
-    background: #121a2a;
-    color: #FF9999;
-    padding: 30px 40px;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    text-align: center;
-    z-index: 1000;
-    max-width: 90%; /* Responsivo para celulares */
-    opacity: 0; /* Começa invisível para fade-in */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave */
-  }
+#overlayPresente {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
 
-  #modalPresente.show {
-    opacity: 1; /* Visível ao aparecer */
-    transform: translate(-50%, -50%) scale(1); /* Escala normal */
-  }
+#overlayPresente.show {
+  display: flex;
+}
 
-  #fecharModal {
-    margin-top: 15px;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 15px;
-    background: #FF9999;
-    color: #0b0f1a;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+#modalPresente {
+  background: linear-gradient(to bottom right, #ffe0e6, #ffd6eb);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.8);
+  width: 90%;
+  max-width: 450px;
+  padding: 30px 20px;
+  text-align: center;
+  color: #8b0000;
+  transform: scale(0.85);
+  opacity: 0;
+  animation: aparecer 0.5s forwards ease-out;
+  position: relative;
+}
 
-  #fecharModal:hover {
-    background:#FF9999 /* Efeito hover mais claro */
+#overlayPresente.show #modalPresente {
+  animation: aparecer 0.6s forwards;
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
   }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.faixa-topo {
+  height: 20px;
+  width: 100%;
+  background: linear-gradient(90deg, #ff4d6d, #ff8080);
+  border-radius: 15px 15px 0 0;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px #ff99aa;
+}
+
+.valor {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #ff4d6d;
+  margin: 20px 0;
+  text-shadow: 0 0 10px #ffccd5;
+}
+
+.mensagem {
+  font-size: 1rem;
+  color: #aa2e5c;
+  margin-bottom: 25px;
+}
+
+#fecharModal {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #ff4d6d, #d6336c);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+}
+#fecharModal:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+}
+
+h2 {
+  font-family: 'Georgia', serif;
+  color: #d6336c;
+  margin-bottom: 10px;
+}
+
 </style>
 
-<div id="modalPresente">
-  Você ganhou um vale presente <br/>
-  <br/><br/>
-  <button id="fecharModal">Fechar</button>
+<div id="overlayPresente">
+  <div id="modalPresente" role="dialog" aria-modal="true">
+    <div class="faixa-topo"></div>
+    <div class="conteudo-presente">
+      <h2>🎁 Vale Presente Especial 🎁</h2>
+      <p>Parabéns! Você ganhou um vale presente</p>
+      <div class="valor">Varios Beijinhos</div>
+      <p class="mensagem">Use a qualquer momento com seu incrivel Namorado</p>
+      <button id="fecharModal">Fechar</button>
+    </div>
+  </div>
 </div>
 
   <!-- Footer -->
@@ -483,31 +542,42 @@
 
     // Modal do presente
    const btnPresente = document.getElementById("presenteBtn");
-  const modal = document.getElementById("modalPresente");
-  const fechar = document.getElementById("fecharModal");
+const overlay = document.getElementById("overlayPresente");
+const modal = document.getElementById("modalPresente");
+const fechar = document.getElementById("fecharModal");
 
+if (btnPresente) {
   btnPresente.addEventListener("click", () => {
-    modal.style.display = "block";
-    setTimeout(() => modal.classList.add("show"), 10); // Adiciona classe após exibição
+    overlay.classList.add("show");
+    setTimeout(() => modal.focus(), 300);
   });
+}
 
-  fechar.addEventListener("click", () => {
-    modal.classList.remove("show");
-    setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
-  });
+fechar.addEventListener("click", () => {
+  overlay.classList.remove("show");
+});
 
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("show");
-      setTimeout(() => modal.style.display = "none", 300); // Aguarda transição
-    }
-  });
+window.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove("show");
+  }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    overlay.classList.remove("show");
+  }
+});
+
     // Efeito de máquina de escrever
-    const textoOriginal = `A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...  
+    const textoOriginal = `Carta Aberta para o Amor da minha vida ,Bruna Fernanda Locatelli: 
+A gente se conheceu há 10 anos, naquela festa junina que mal sabia eu que mudaria minha vida por completo por conta de uma aposta ...   
 Já fomos um "nós" uma vez, e por algum motivo o tempo nos separou.  
 Mas hoje, depois de tantos anos, nossos caminhos se encontraram de novo — e finalmente a vida faz sentido de novo .  
-Ter você de volta é como respirar de novo e ser Feliz Novamente . Você é e sempre foi o amor da minha vida. <br/> 
-Te amo, Bruna Fernanda Locatelli. 🤍`;
+Mesmo sendo dificil e um caminho extremamente conturbado
+
+Ter você de volta é como respirar de novo e ser Feliz Novamente . Você é e sempre foi o amor da minha vida Todinha. <br/>  
+Te amo do fundo do meu coração 🤍`;
     
     const typingText = document.getElementById('typing-text');
     let indexText = 0;
